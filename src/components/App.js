@@ -1,3 +1,5 @@
+import Book from "./Book";
+import SearchBook from "./SearchBook";
 
 function App() {
   
@@ -6,6 +8,8 @@ function App() {
       <header className="App-header">
         bofi
       </header>
+      <SearchBook />
+      <Book />
     </div>
   );
 }
