@@ -1,9 +1,11 @@
 import { useState } from "react";
+import KakaoSearch from "../api/KakaoSearch";
 import NaverSearch from "../api/NaverSearch";
 
 function SearchBook() {
 
   const [search, setSearch] = useState("");
+  const [keyword, setkeyword] = useState("");
 
   const onChange = (event) => {
     const {
@@ -16,13 +18,13 @@ function SearchBook() {
   const onSearch = (event) => {
     event.preventDefault();
 
-    console.log(search);
+    setkeyword(search);
+
     
   };
 
   return (
     <div>
-      <form onSubmit={onSearch}>
         
         <input
           name="search"
@@ -32,11 +34,9 @@ function SearchBook() {
           value={search}
         />
 
-        <input type="submit" value="검색" />
+        <input type="submit" onClick={onSearch} value="검색" />
 
-        <NaverSearch />
-      
-      </form>
+        <KakaoSearch keyword={keyword}/>
     </div>
 
   )

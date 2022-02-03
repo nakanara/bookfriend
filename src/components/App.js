@@ -9,7 +9,6 @@ function App() {
         bofi
       </header>
       <SearchBook />
-      <Book />
     </div>
   );
 }
