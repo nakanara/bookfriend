@@ -1,11 +1,17 @@
-import { useState } from "react";
-import KakaoSearch from "../api/KakaoSearch";
-import NaverSearch from "../api/NaverSearch";
+import { useEffect, useState } from "react";
+import * as KakaoSearch from "../api/KakaoSearch";
+import Book from "./Book";
 
 function SearchBook() {
 
   const [search, setSearch] = useState("");
   const [keyword, setkeyword] = useState("");
+  let [searchItem, setSearchItem] = useState([]);
+  
+  
+  useEffect( ()=> {    
+    
+  }, []);
 
   const onChange = (event) => {
     const {
@@ -17,11 +23,14 @@ function SearchBook() {
 
   const onSearch = (event) => {
     event.preventDefault();
-
-    setkeyword(search);
-
+   
     
+    KakaoSearch.getSearch((res)=> {             
+      setSearchItem(res.documents);              
+    }, search, 1);
   };
+
+
 
   return (
     <div>
@@ -36,7 +45,13 @@ function SearchBook() {
 
         <input type="submit" onClick={onSearch} value="검색" />
 
-        <KakaoSearch keyword={keyword}/>
+        <div>        
+          {searchItem  && 
+            searchItem.map((bookInfo, index) => (              
+                <Book key={index} bookInfo={bookInfo}/>              
+            ))
+          }
+        </div>
     </div>
 
   )

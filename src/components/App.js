@@ -1,13 +1,14 @@
-import Book from "./Book";
 import SearchBook from "./SearchBook";
 
 function App() {
-  
+   
+
   return (
     <div className="App">
       <header className="App-header">
         bofi
-      </header>
+      </header>      
+
       <SearchBook />
     </div>
   );
