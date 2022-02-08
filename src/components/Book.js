@@ -1,4 +1,9 @@
 
+/**
+ * 책 정보 표시
+ * @param {*} param0 
+ * @returns 
+ */
 function Book ({bookInfo}) {
 
   return (
