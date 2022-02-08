@@ -11,6 +11,7 @@ function SearchBook() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [searchItem, setSearchItem] = useState([]);
+  const [total_count, setTotalCount] = useState(0);
   const [isEnd, setIsEnd] = useState(true);
   
   
@@ -33,21 +34,22 @@ function SearchBook() {
 
   const onSearch = (event) => {
     event.preventDefault();
-    setPage(1);
-    KakaoSearch.getSearch((res)=> {             
-      setSearchItem([...res.documents]);
-      setIsEnd(res.meta.is_end);
-    }, search, page);
+    fnSearch(1);
   };
 
   const onSearchMore = (event) => {
     event.preventDefault();
-    let tPage = page+1;
-    setPage(tPage);
-    KakaoSearch.getSearch((res)=> {             
+    fnSearch(page+1);
+  }
+
+  const fnSearch = (page) => {
+    setPage(page);
+
+    KakaoSearch.getSearch((res)=> {       
       setSearchItem([...searchItem, ...res.documents]);
       setIsEnd(res.meta.is_end);
-    }, search, tPage);
+      setTotalCount(res.meta.total_count);
+    }, search, page);
   }
 
 
@@ -66,6 +68,7 @@ function SearchBook() {
 
         <input type="submit" onClick={onSearch} value="검색" />
 
+        <span>총 {total_count}건</span>
         <div>        
           {searchItem  && 
             searchItem.map((bookInfo, index) => (              
